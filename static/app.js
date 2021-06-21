@@ -16,7 +16,7 @@ class Cupcake {
 		return cupcakes.data.cupcakes;
 	}
 
-	static createCupcakes(cupcakes){
+	static createCupcakesHtml(cupcakes){
 		$cupcakes.empty();
 		for (const cupcake of cupcakes){
 			$cupcakes.append(
@@ -38,7 +38,7 @@ class Cupcake {
 }
 
 async function showAllCupcakes(){
-	Cupcake.createCupcakes(await Cupcake.fetchAllCupcakes())
+	Cupcake.createCupcakesHtml(await Cupcake.fetchAllCupcakes())
 }
 
 async function handleFormSubmit(evt){
@@ -46,7 +46,7 @@ async function handleFormSubmit(evt){
 	const newCupcake = new Cupcake($("#flavor").val(), $("#size").val(), parseFloat($("#rating").val()), $("#image").val())
 	await newCupcake.sendNewCupcake()
 
-	Cupcake.createCupcakes(await Cupcake.fetchAllCupcakes())
+	showAllCupcakes()
 	evt.target.reset();
 }
 
